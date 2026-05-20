@@ -1,0 +1,76 @@
+:host {
+  display: block;
+}
+
+.app {
+  min-height: 100vh;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    background: #001529;
+    padding: 0 32px;
+  }
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+
+    nz-icon {
+      font-size: 22px;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: 24px;
+
+    a {
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 500;
+      transition: color 0.2s ease;
+
+      &:hover,
+      &.is-active {
+        color: #fff;
+      }
+
+      &.is-active {
+        border-bottom: 2px solid #1677ff;
+        padding-bottom: 2px;
+      }
+    }
+  }
+
+  &__content {
+    padding: 32px;
+    background: #f5f7fa;
+  }
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__footer {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.55);
+  }
+}
+
+@media (max-width: 600px) {
+  .app__header {
+    padding: 0 16px;
+    gap: 16px;
+  }
+
+  .app__content {
+    padding: 16px;
+  }
+}

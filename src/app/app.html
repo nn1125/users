@@ -1,0 +1,22 @@
+<nz-layout class="app">
+  <nz-header class="app__header">
+    <a routerLink="/users" class="app__brand">
+      <nz-icon nzType="user" />
+      <span>YADRO Users</span>
+    </a>
+    <nav class="app__nav">
+      <a routerLink="/users" routerLinkActive="is-active">Пользователи</a>
+      <a routerLink="/users/new" routerLinkActive="is-active">Создать</a>
+    </nav>
+  </nz-header>
+
+  <nz-content class="app__content">
+    <div class="app__container">
+      <router-outlet />
+    </div>
+  </nz-content>
+
+  <nz-footer class="app__footer">
+    YADRO test task © {{ year }} — Angular {{ '20' }} + NG-ZORRO
+  </nz-footer>
+</nz-layout>

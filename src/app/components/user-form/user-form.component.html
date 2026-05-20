@@ -1,0 +1,163 @@
+<div class="user-form">
+  <a routerLink="/users" class="user-form__back">
+    <nz-icon nzType="arrow-left" /> К списку пользователей
+  </a>
+
+  <nz-spin [nzSpinning]="loading()">
+    <nz-card>
+      <h1 class="user-form__title">
+        {{ isEdit() ? 'Редактирование пользователя' : 'Новый пользователь' }}
+      </h1>
+
+      <form nz-form nzLayout="vertical" [formGroup]="form" (ngSubmit)="submit()">
+        <div nz-row [nzGutter]="[16, 0]">
+          <div nz-col [nzXs]="24" [nzMd]="12">
+            <nz-form-item>
+              <nz-form-label nzRequired>Имя</nz-form-label>
+              <nz-form-control
+                nzHasFeedback
+                [nzErrorTip]="nameError"
+              >
+                <input nz-input formControlName="name" placeholder="Иван Иванов" />
+                <ng-template #nameError let-control>
+                  @if (control.hasError('required')) { Имя обязательно }
+                  @else if (control.hasError('minlength')) { Минимум 2 символа }
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzXs]="24" [nzMd]="12">
+            <nz-form-item>
+              <nz-form-label nzRequired>Username</nz-form-label>
+              <nz-form-control
+                nzHasFeedback
+                [nzErrorTip]="usernameError"
+              >
+                <input nz-input formControlName="username" placeholder="ivanov" />
+                <ng-template #usernameError let-control>
+                  @if (control.hasError('required')) { Username обязателен }
+                  @else if (control.hasError('minlength')) { Минимум 2 символа }
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzXs]="24" [nzMd]="12">
+            <nz-form-item>
+              <nz-form-label nzRequired>Email</nz-form-label>
+              <nz-form-control
+                nzHasFeedback
+                [nzErrorTip]="emailError"
+              >
+                <input nz-input formControlName="email" placeholder="user@example.com" />
+                <ng-template #emailError let-control>
+                  @if (control.hasError('required')) { Email обязателен }
+                  @else if (control.hasError('email')) { Некорректный формат email }
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzXs]="24" [nzMd]="12">
+            <nz-form-item>
+              <nz-form-label>Телефон</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="phone" placeholder="+7 (000) 000-00-00" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col [nzXs]="24">
+            <nz-form-item>
+              <nz-form-label>Сайт</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="website" placeholder="example.com" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+
+        <nz-divider nzText="Адрес" nzOrientation="left"></nz-divider>
+        <div nz-row [nzGutter]="[16, 0]" formGroupName="address">
+          <div nz-col [nzXs]="24" [nzMd]="12">
+            <nz-form-item>
+              <nz-form-label>Город</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="city" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzXs]="24" [nzMd]="12">
+            <nz-form-item>
+              <nz-form-label>Индекс</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="zipcode" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzXs]="24" [nzMd]="12">
+            <nz-form-item>
+              <nz-form-label>Улица</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="street" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzXs]="24" [nzMd]="12">
+            <nz-form-item>
+              <nz-form-label>Корпус/квартира</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="suite" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+
+        <nz-divider nzText="Компания" nzOrientation="left"></nz-divider>
+        <div nz-row [nzGutter]="[16, 0]" formGroupName="company">
+          <div nz-col [nzXs]="24" [nzMd]="12">
+            <nz-form-item>
+              <nz-form-label>Название</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="name" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzXs]="24" [nzMd]="12">
+            <nz-form-item>
+              <nz-form-label>Слоган</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="catchPhrase" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzXs]="24">
+            <nz-form-item>
+              <nz-form-label>Сфера</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="bs" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+
+        <div class="user-form__actions">
+          <button
+            nz-button
+            nzType="primary"
+            nzSize="large"
+            [nzLoading]="submitting()"
+            type="submit"
+          >
+            {{ isEdit() ? 'Сохранить' : 'Создать' }}
+          </button>
+          @if (!isEdit()) {
+            <button nz-button nzSize="large" type="button" (click)="reset()">Сбросить</button>
+          }
+          <a nz-button nzSize="large" routerLink="/users">Отмена</a>
+        </div>
+      </form>
+    </nz-card>
+  </nz-spin>
+</div>

@@ -1,0 +1,44 @@
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 600;
+    }
+  }
+
+  &__subtitle {
+    margin: 4px 0 0;
+    color: rgba(0, 0, 0, 0.55);
+  }
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  &__search {
+    width: min(420px, 100%);
+  }
+
+  &__counter {
+    color: rgba(0, 0, 0, 0.55);
+    font-size: 13px;
+  }
+
+  &__name {
+    font-weight: 500;
+  }
+}

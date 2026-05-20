@@ -1,0 +1,94 @@
+<div class="user-detail">
+  <a routerLink="/users" class="user-detail__back">
+    <nz-icon nzType="arrow-left" /> К списку пользователей
+  </a>
+
+  <nz-spin [nzSpinning]="loading()">
+    @if (error()) {
+      <nz-result
+        nzStatus="404"
+        nzTitle="Пользователь не найден"
+        nzSubTitle="Проверьте идентификатор и попробуйте снова."
+      >
+        <div nz-result-extra>
+          <a nz-button nzType="primary" routerLink="/users">К списку</a>
+        </div>
+      </nz-result>
+    } @else if (user(); as u) {
+      <nz-card class="user-detail__card">
+        <div class="user-detail__header">
+          <div class="user-detail__avatar">
+            <nz-icon nzType="user" />
+          </div>
+          <div class="user-detail__title">
+            <h1>{{ u.name }}</h1>
+            <nz-tag nzColor="blue">&#64;{{ u.username }}</nz-tag>
+          </div>
+          <div class="user-detail__actions">
+            <a nz-button nzType="primary" [routerLink]="['/users', u.id, 'edit']">
+              <nz-icon nzType="edit" /> Редактировать
+            </a>
+            <button
+              nz-button
+              nzDanger
+              nz-popconfirm
+              nzPopconfirmTitle="Удалить пользователя?"
+              nzOkText="Да"
+              nzCancelText="Нет"
+              (nzOnConfirm)="deleteUser()"
+            >
+              <nz-icon nzType="delete" /> Удалить
+            </button>
+          </div>
+        </div>
+
+        <nz-descriptions nzBordered nzTitle="Контактная информация" [nzColumn]="2">
+          <nz-descriptions-item nzTitle="Email">
+            <nz-icon nzType="mail" /> <a href="mailto:{{ u.email }}">{{ u.email }}</a>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Телефон">
+            <nz-icon nzType="phone" /> {{ u.phone || '—' }}
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Сайт">
+            <nz-icon nzType="global" />
+            @if (u.website) {
+              <a [href]="'http://' + u.website" target="_blank" rel="noopener">{{ u.website }}</a>
+            } @else { — }
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="ID">#{{ u.id }}</nz-descriptions-item>
+        </nz-descriptions>
+
+        @if (u.address) {
+          <nz-descriptions nzBordered nzTitle="Адрес" [nzColumn]="2">
+            <nz-descriptions-item nzTitle="Город">
+              <nz-icon nzType="home" /> {{ u.address.city }}
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Улица">
+              {{ u.address.street }}, {{ u.address.suite }}
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Индекс">{{ u.address.zipcode }}</nz-descriptions-item>
+            @if (u.address.geo) {
+              <nz-descriptions-item nzTitle="Координаты">
+                {{ u.address.geo.lat }}, {{ u.address.geo.lng }}
+              </nz-descriptions-item>
+            }
+          </nz-descriptions>
+        }
+
+        @if (u.company) {
+          <nz-descriptions nzBordered nzTitle="Компания" [nzColumn]="1">
+            <nz-descriptions-item nzTitle="Название">
+              <nz-icon nzType="bank" /> {{ u.company.name }}
+            </nz-descriptions-item>
+            @if (u.company.catchPhrase) {
+              <nz-descriptions-item nzTitle="Слоган">{{ u.company.catchPhrase }}</nz-descriptions-item>
+            }
+            @if (u.company.bs) {
+              <nz-descriptions-item nzTitle="Сфера">{{ u.company.bs }}</nz-descriptions-item>
+            }
+          </nz-descriptions>
+        }
+      </nz-card>
+    }
+  </nz-spin>
+</div>
