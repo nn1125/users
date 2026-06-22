@@ -1,4 +1,4 @@
-# YADRO Users — тестовое задание
+
 ## Запуск
 ```bash
 npm install
