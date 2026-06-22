@@ -112,6 +112,23 @@
               </nz-form-control>
             </nz-form-item>
           </div>
+
+          <div nz-col [nzXs]="24" [nzMd]="12" formGroupName="geo">
+            <nz-form-item>
+              <nz-form-label>Широта (lat)</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="lat" placeholder="-37.3159" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col [nzXs]="24" [nzMd]="12" formGroupName="geo">
+            <nz-form-item>
+              <nz-form-label>Долгота (lng)</nz-form-label>
+              <nz-form-control>
+                <input nz-input formControlName="lng" placeholder="81.1496" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
         </div>
 
         <nz-divider nzText="Компания" nzOrientation="left"></nz-divider>

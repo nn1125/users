@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, HostListener, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 import { User } from '../../models/user.model';
 import { UserStoreService } from '../../services/user-store.service';
@@ -31,6 +32,7 @@ import { UserStoreService } from '../../services/user-store.service';
     NzSpinModule,
     NzEmptyModule,
     NzToolTipModule,
+    NzPaginationModule,
   ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
@@ -44,6 +46,7 @@ export class UserListComponent {
   readonly search = signal('');
   readonly pageIndex = signal(1);
   readonly pageSize = signal(5);
+  readonly isMobile = signal(this.readIsMobile());
 
   readonly filtered = computed<User[]>(() => {
     const term = this.search().trim().toLowerCase();
@@ -59,6 +62,21 @@ export class UserListComponent {
   });
 
   readonly total = computed(() => this.filtered().length);
+
+  // Текущая страница для карточек на мобильных (таблица пагинирует сама)
+  readonly paged = computed<User[]>(() => {
+    const start = (this.pageIndex() - 1) * this.pageSize();
+    return this.filtered().slice(start, start + this.pageSize());
+  });
+
+  private readIsMobile(): boolean {
+    return typeof window !== 'undefined' && window.innerWidth < 768;
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.isMobile.set(this.readIsMobile());
+  }
 
   constructor() {
     if (!this.store.loaded()) {

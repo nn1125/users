@@ -71,6 +71,10 @@ export class UserFormComponent {
       suite: [''],
       city: [''],
       zipcode: [''],
+      geo: this.fb.group({
+        lat: [''],
+        lng: [''],
+      }),
     }),
     company: this.fb.group({
       name: [''],
