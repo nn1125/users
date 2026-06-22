@@ -52,8 +52,6 @@ src/app/
 | `updateUser()`  | `PUT    /users/{id}`                |
 | `deleteUser()`  | `DELETE /users/{id}`                |
 
-JSONPlaceholder не сохраняет POST/PUT/DELETE, поэтому `UserStoreService`
-дублирует изменения в клиентском signal-state, чтобы CRUD ощущался живым.
 
 ## Формы и валидация
 
